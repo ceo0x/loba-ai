@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loba AI Playground</title>
+  <link rel="stylesheet" href="/web/styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <header class="topbar">
+      <div>
+        <h1>Loba AI Playground</h1>
+        <p>Humano vs IA o IA vs IA local con modelos entrenados</p>
+      </div>
+      <span id="healthBadge" class="badge">API: ...</span>
+    </header>
+
+    <section id="modelsSetupPanel" class="panel">
+      <h2>Modelos locales</h2>
+      <div class="row">
+        <input id="modelName" placeholder="nombre-modelo" />
+        <input id="modelPath" placeholder="artifacts/loba_maskable_ppo.zip" />
+        <button id="registerModelBtn">Registrar modelo</button>
+      </div>
+      <div id="modelList" class="pill-list"></div>
+    </section>
+
+    <section id="matchSetupPanel" class="panel">
+      <h2>Crear partida</h2>
+      <div id="playersConfig" class="grid2"></div>
+      <div class="row">
+        <button id="addPlayerBtn" class="secondary" type="button">Agregar jugador</button>
+        <button id="removePlayerBtn" class="secondary" type="button">Quitar jugador</button>
+        <label class="check-control density-control" for="densityModeSel">
+          <span>Densidad</span>
+          <select id="densityModeSel">
+            <option value="comfortable">Comfortable</option>
+            <option value="compact">Compact</option>
+          </select>
+        </label>
+        <label class="check-control" for="autoplayModeChk">
+          <input id="autoplayModeChk" type="checkbox" />
+          <span>Autoplay</span>
+        </label>
+        <label class="check-control" for="showBotCardsChk">
+          <input id="showBotCardsChk" type="checkbox" />
+          <span>Mostrar cartas del bot</span>
+        </label>
+      </div>
+      <div class="row">
+        <button id="createMatchBtn">Crear partida</button>
+        <button id="quickGameBtn" class="secondary" type="button" title="Usa el último modelo registrado y el nombre Invitado para el humano">Juego rápido</button>
+        <button id="refreshBtn">Refrescar estado</button>
+      </div>
+      <p id="matchMeta" class="muted"></p>
+    </section>
+
+    <section class="playground">
+      <article class="panel game-state table-panel">
+        <h2 class="table-panel-title">Mesa</h2>
+
+        <div id="phaseBanner" class="phase-banner" aria-live="polite">
+          <span class="phase-banner__label">Fase</span>
+          <span id="phaseBannerText" class="phase-banner__phase">—</span>
+          <span id="phaseBannerHint" class="phase-banner__hint"></span>
+        </div>
+
+        <div class="table-felt">
+          <div id="stateSummary" class="felt-summary"></div>
+
+          <div class="felt-players" id="playersView"></div>
+
+          <div class="felt-center">
+            <div class="felt-pile felt-pile--stock">
+              <span class="felt-pile__label">Mazo</span>
+              <div id="stockVisual" class="pile-stack pile-stack--stock" title="Cartas en stock"></div>
+              <span id="stockCount" class="felt-pile__count">0</span>
+            </div>
+
+            <div class="felt-pile felt-pile--discard">
+              <span class="felt-pile__label">Descarte</span>
+              <div
+                id="discardDropZone"
+                class="discard-drop-zone"
+                data-drop-active="false"
+                title="Arrastra una carta de tu mano aqui para descartar (si es tu turno)"
+              >
+                <span class="discard-drop-zone__hint">Soltar aqui</span>
+                <div id="discardLastThree" class="cards-row discard-last-row"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="felt-melds-wrap">
+            <h3 class="felt-melds-title">Juegos en mesa</h3>
+            <div id="tableMelds" class="melds felt-melds"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel actions-panel">
+        <h2>Acciones validas</h2>
+        <div id="inMatchControls" class="row" style="display:none">
+          <button id="refreshBtnInMatch">Refrescar estado</button>
+          <label class="check-control density-control" for="densityModeSelInMatch">
+            <span>Densidad</span>
+            <select id="densityModeSelInMatch">
+              <option value="comfortable">Comfortable</option>
+              <option value="compact">Compact</option>
+            </select>
+          </label>
+          <label class="check-control" for="showBotCardsChkInMatch">
+            <input id="showBotCardsChkInMatch" type="checkbox" />
+            <span>Mostrar cartas del bot</span>
+          </label>
+        </div>
+        <div id="actions" class="actions"></div>
+        <p class="muted actions-hint">Click o arrastra al descarte cuando corresponda.</p>
+      </article>
+
+      <article class="panel">
+        <h2>Log</h2>
+        <div id="log" class="log"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.27/dist/interact.min.js"></script>
+  <script src="/web/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loba Arena</title>
+  <link rel="stylesheet" href="/web/styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <header class="topbar">
+      <div>
+        <h1>Loba Arena</h1>
+        <p>Crea una sala, comparte el room id y juega por API sin revelar cartas ajenas.</p>
+      </div>
+      <span id="arenaHealthBadge" class="badge">API: ...</span>
+    </header>
+
+    <section class="panel">
+      <h2>1) Registrar modelo local (host)</h2>
+      <div class="row">
+        <input id="arenaModelName" placeholder="nombre-modelo" />
+        <input id="arenaModelPath" placeholder="artifacts/loba_maskable_ppo.zip" />
+        <button id="arenaRegisterModelBtn">Registrar modelo</button>
+      </div>
+      <div id="arenaModelList" class="pill-list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>2) Crear sala</h2>
+      <div class="row">
+        <input id="arenaRoomName" placeholder="nombre sala (opcional)" />
+        <input id="arenaHostModelName" placeholder="modelo host (obligatorio)" />
+        <button id="arenaCreateRoomBtn">Crear sala</button>
+      </div>
+      <p id="arenaHostRoomMeta" class="muted"></p>
+    </section>
+
+    <section class="panel">
+      <h2>3) Host listo / estado</h2>
+      <div class="row">
+        <button id="arenaHostReadyBtn" class="secondary">Marcar host ready</button>
+        <button id="arenaRefreshStateBtn" class="secondary">Refrescar estado</button>
+      </div>
+      <div id="arenaStateSummary" class="muted"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Acciones (si te toca)</h2>
+      <div id="arenaActions" class="actions"></div>
+      <p class="muted">Las acciones y cartas mostradas estan filtradas por token del jugador.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Log</h2>
+      <div id="arenaLog" class="log"></div>
+    </section>
+  </main>
+
+  <script src="/web/arena.js"></script>
+</body>
+</html>

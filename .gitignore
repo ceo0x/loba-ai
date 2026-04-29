@@ -1,0 +1,88 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Test / type-checker caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.hypothesis/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# --- ML / training artifacts ---
+# Models, checkpoints, replay buffers, eval logs, etc. are large and
+# regenerable from training. Keep them out of git.
+artifacts/
+runs/
+wandb/
+mlruns/
+tensorboard/
+*.zip
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.tfevents.*
+
+# Match / play logs that the trainer rotates
+*_recent_matches.json
+
+# --- Editor / IDE / AI tools ---
+.claude/
+.codex/
+.cursor/
+.aider*
+.continue/
+.windsurf/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS noise ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# --- Local / temp ---
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+local_settings.py
+tmp/
+scratch/
+
+# --- Local-only docs ---
+# Internal notes / WIP guides — keep on disk, do not publish.
+docs/
